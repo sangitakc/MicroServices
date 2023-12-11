@@ -1,0 +1,13 @@
+server:
+  port: 9193
+spring:
+  application:
+   name: CONFIG-SERVER
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/sangitakc/microservice-configuration
+          clone-on-start: true
+

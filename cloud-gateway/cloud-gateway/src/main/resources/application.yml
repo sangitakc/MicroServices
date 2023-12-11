@@ -1,0 +1,40 @@
+
+spring:
+  application:
+    name: API_CLOUD_GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order/**
+          filters:
+            - AuthenticationFilter
+
+        - id: PERSON-SERVICE
+          uri: lb://PERSON-SERVICE
+          predicates:
+            - Path=/person/**
+          filters:
+            - AuthenticationFilter
+
+        - id: IDENTITY-SERVICE
+          uri: lb://IDENTITY-SERVICE
+          predicates:
+            - Path=/auth/**
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 9194
+
+
